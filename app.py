@@ -44,8 +44,8 @@ if __name__ == "__main__":
 	end_time = time.time()
 	total_time = end_time - start_time
 
-	with open("output_file.txt", "w", encoding="utf-8") as file:
-		file.write(text)
-
 	if text:
+		with open("output_file.txt", "w", encoding="utf-8") as file:
+			file.write(text)
+
 		print(f"Recognizing total time: {total_time}s")
