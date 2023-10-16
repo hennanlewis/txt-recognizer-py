@@ -5,6 +5,8 @@ This project focuses on developing a text recognition system capable of extracti
 
 - Python 3.x installed
 
+> PS: If you are a `Windows` user, please install Tesseract following the instructions provided in [this link](https://github.com/UB-Mannheim/tesseract/wiki) to run its functions properly.
+
 # Installation
 
 1. Clone the repository:
