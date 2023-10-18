@@ -1,9 +1,11 @@
+from PIL import ImageGrab
 import cv2
 import os
+import platform
+import pygame
+import pyperclip
 import pytesseract
 import time
-import platform
-from PIL import ImageGrab, Image
 
 operational_system = platform.system()
 
@@ -13,6 +15,10 @@ IMG_PATH = "images"
 
 def get_all_images():
 	img_array = []
+
+	if not os.path.exists(IMG_PATH):
+		os.makedirs(IMG_PATH)
+
 	for image_name in os.listdir(IMG_PATH):
 		if image_name.lower().endswith(tuple(IMG_EXTENSIONS)):
 			img_array.append(image_name)
@@ -46,22 +52,36 @@ def text_from_clipboard_image(clipboard_image):
 		clipboard_image.save(f"./{IMG_PATH}/{clipboard_image_name}")
 		clipboard_image_text = recognize_text(clipboard_image_name)
 		os.remove(f"./{IMG_PATH}/{clipboard_image_name}")
-		print(f"\n\n{clipboard_image_text}\n\n")
+		pyperclip.copy(clipboard_image_text)
+		print(f"\n{clipboard_image_text}\n")
+
+def execution_end_sound():
+	pygame.init()
+	pygame.mixer.music.load("./sound/finished.mp3")
+	pygame.mixer.music.play()
+
+	# Aguarda até que a reprodução de áudio termine
+	while pygame.mixer.music.get_busy():
+		pygame.time.delay(100)
+
+	pygame.quit()
 
 if __name__ == "__main__":
 	img_names = get_all_images()
 
-	clipboard_image = ImageGrab.grabclipboard()
-	if clipboard_image: text_from_clipboard_image(clipboard_image)
-
 	start_time = time.time()
-	print(time.time())
+	clipboard_image = ImageGrab.grabclipboard()
+	if clipboard_image:
+		text_from_clipboard_image(clipboard_image)
+		execution_end_sound()
+
 	text = image_text_from_image_folder(img_names)
 	end_time = time.time()
 	total_time = end_time - start_time
+
+	print(f"Character recognition completed in {round(total_time)} seconds")
 
 	if text:
 		with open("output_file.txt", "w", encoding="utf-8") as file:
 			file.write(text)
 
-		print(f"Recognizing total time: {total_time}s")
