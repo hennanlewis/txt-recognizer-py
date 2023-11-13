@@ -1,0 +1,109 @@
+@font-face {
+	font-family: "Signika";
+	src: url("./SignikaRegular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Signika Bold";
+	src: url("./SignikaBold.ttf") format("truetype");
+}
+
+:root {
+	--primary: #34726C;
+	--support: #B7BF75;
+	--bg-primary: #FBF1E8;
+	--bg-support: #F0EDD9;
+	--text-primary: #776350;
+	--text-support: #BEE7B5;
+	--border-primary: #8BAB9E;
+	--border-support: #8E8775;
+	--color-extra1: #3873A6;
+	--color-extra2: #9B8ABF;
+	--color-extra3: #CDB25544;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Signika";
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: var(--primary);
+}
+
+main {
+	display: flex;
+	width: 56rem;
+	max-width: 90%;
+	padding: 8px;
+	background-color: var(--bg-primary);
+	border-radius: 8px;
+	box-shadow: 0 10px 10px #0006;
+}
+
+aside {
+	width: 40%;
+}
+
+aside img {
+	width: 100%;
+	object-fit: cover;
+	border-radius: 2px;
+}
+
+.container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 1.5rem 1rem;
+}
+
+.title {
+	padding: 8px 12px;
+	color: var(--text-primary);
+	background: var(--bg-support);
+}
+
+.container_title {
+	padding: 5px;
+	padding-left: 1rem;
+	background: var(--primary);
+	color: #FFF;
+	text-align: left;
+	border-radius: 4px;
+	box-shadow: 0 0 3px var(--border-primary), inset 0 0 1px var(--border-primary);
+}
+
+.container_form {
+	display: flex;
+	flex-direction: column;
+	list-style-type: none;
+	gap: 5px;
+}
+
+.container_form input {
+	margin-left: 1rem;
+}
+
+.container_form .result_field {
+	display: flex;
+	flex-direction: column;
+}
+
+@media (max-width: 720px) {
+	main {
+		flex-direction: column;
+	}
+
+	aside {
+		margin: 0 auto;
+		width: 80%;
+	}
+}
