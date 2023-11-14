@@ -83,7 +83,7 @@ main,
 	display: flex;
 	flex-direction: column;
 	width: 30rem;
-	max-width: 95%;
+	max-width: 95vw;
 	min-height: 20rem;
 	padding: 1.5rem;
 	background: #FFF;
@@ -162,10 +162,6 @@ main,
 	column-gap: 0.5rem;
 }
 
-.element_with-description label {
-	width: 100%;
-}
-
 .element_with-description span {
 	font-size: 0.875em;
 	color: var(--text-span);
@@ -205,7 +201,6 @@ div.actions:hover {
 .footer {
 	display: flex;
 	justify-content: center;
-	width: 100%;
 	margin-bottom: 0;
 	padding: 1rem;
 	color: var(--text-support);
