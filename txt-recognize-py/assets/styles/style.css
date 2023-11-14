@@ -201,6 +201,7 @@ div.actions:hover {
 .footer {
 	display: flex;
 	justify-content: center;
+	margin-top: auto;
 	margin-bottom: 0;
 	padding: 1rem;
 	color: var(--text-support);
