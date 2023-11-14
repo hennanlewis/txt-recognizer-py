@@ -5,30 +5,62 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="assets/style.css">
+	<link rel="stylesheet" href="assets/styles/style.css">
 </head>
 
 <body>
-	<main>
-		<aside><img src="./assets/images/printer.jpeg" alt=""></aside>
-		<div class="container">
-			<h3 class="container_title">Options:</h3>
-			<form class="container_form">
-				<label>
-					<input type="checkbox" name="autorecognize">
-					Get text from clipboard image automaticaly
-				</label>
-				<label>
-					<input type="checkbox" name="copy-text">
-					Copy text to the clipboard automaticaly
-				</label>
-				<label class="result_field">
-					<span>Result:</span>
-					<textarea name="result" id="" rows="5"></textarea>
-				</label>
-			</form>
-		</div>
-	</main>
+	<section class="top_container">
+		<h1 class="top_container_title">Image Text Scanner</h1>
+		<p>
+			Conduct the recognition of text contained within images, converting visual content into editable and
+			searchable text through text recognition algorithms.
+		</p>
+	</section>
+	<div class="container">
+		<main>
+			<h2 class="main_title">Options</h2>
+			<div class="content">
+				<form class="content_form">
+					<div>
+						<label for="location" class="form_select_label">Text language</label>
+						<select id="location" name="location" class="form_select_input">
+							<option>English</option>
+							<option>Portuguese</option>
+							<option>Japanese</option>
+						</select>
+					</div>
+					<div class="element_with-description">
+						<div>
+							<label for="clipboard" class="form_input">Clipboard content</label>
+							<input id="clipboard" type="checkbox" name="clipboard">
+						</div>
+						<span>
+							Utilizes copied images from the clipboard (usually when taking a screenshot
+							or copying an image from a web page)
+						</span>
+					</div>
+					<div class="element_with-description">
+						<div>
+							<label for="autocopy" class="form_input">Automatically copies</label>
+							<input id="autocopy" type="checkbox" name="autocopy">
+						</div>
+						<span>Automatically copies the recognized text to the clipboard</span>
+					</div>
+					<div class="actions">
+						<button type="button">Start recognition</button>
+					</div>
+				</form>
+			</div>
+		</main>
+		<section class="finalText">
+			<h2 class="main_title">Results</h2>
+			<div id="result" class="content">
+			</div>
+		</section>
+	</div>
+	<footer class="footer">
+		<span>© 2023 <a href="https://hennanlewis.com">Hennan Lewis</a></span>
+	</footer>
 </body>
 
 </html>
