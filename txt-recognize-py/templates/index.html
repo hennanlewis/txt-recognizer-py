@@ -24,15 +24,15 @@
 					<div>
 						<label for="location" class="form_select_label">Text language</label>
 						<select id="location" name="location" class="form_select_input">
-							<option>English</option>
-							<option>Portuguese</option>
-							<option>Japanese</option>
+							<option value="en">English</option>
+							<option value="por">Portuguese</option>
+							<option value="jp">Japanese</option>
 						</select>
 					</div>
 					<div class="element_with-description">
 						<div>
 							<label for="clipboard" class="form_input">Clipboard content</label>
-							<input id="clipboard" type="checkbox" name="clipboard">
+							<input id="clipboard" type="checkbox" name="clipboard" checked>
 						</div>
 						<span>
 							Utilizes copied images from the clipboard (usually when taking a screenshot
@@ -42,12 +42,12 @@
 					<div class="element_with-description">
 						<div>
 							<label for="autocopy" class="form_input">Automatically copies</label>
-							<input id="autocopy" type="checkbox" name="autocopy">
+							<input id="autocopy" type="checkbox" name="autocopy" checked>
 						</div>
 						<span>Automatically copies the recognized text to the clipboard</span>
 					</div>
 					<div class="actions">
-						<button type="button">Start recognition</button>
+						<button id="startRecognitionButton" type="button">Start</button>
 					</div>
 				</form>
 			</div>
@@ -61,6 +61,7 @@
 	<footer class="footer">
 		<span>© 2023 <a href="https://hennanlewis.com">Hennan Lewis</a></span>
 	</footer>
+	<script src="assets/scripts/script.js" type="module"></script>
 </body>
 
 </html>

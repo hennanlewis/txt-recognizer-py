@@ -13,11 +13,13 @@ IMG_EXTENSIONS = [".jpg", ".jpeg", ".png", ".bmp"]
 TESSERACT_WINDOWS_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 IMG_PATH = "images"
 
-def get_all_images_names():
-	img_array = []
-
+def check_image_folder_exist():
 	if not os.path.exists(IMG_PATH):
 		os.makedirs(IMG_PATH)
+
+def get_all_images_names():
+	img_array = []
+	check_image_folder_exist()
 
 	for image_name in os.listdir(IMG_PATH):
 		if image_name.lower().endswith(tuple(IMG_EXTENSIONS)):
@@ -28,12 +30,14 @@ def get_clipboard_image():
 	return ImageGrab.grabclipboard()
 
 def text_from_clipboard_image(clipboard_image):
+		check_image_folder_exist()
 		clipboard_image_name = f"image_{str(time.time())}.jpg"
 		clipboard_image.save(f"./{IMG_PATH}/{clipboard_image_name}")
 		clipboard_image_text = recognize_text(clipboard_image_name)
 		os.remove(f"./{IMG_PATH}/{clipboard_image_name}")
 		pyperclip.copy(clipboard_image_text)
 		print(f"\n{clipboard_image_text}\n")
+		return clipboard_image_text
 
 def execution_end_sound():
 	pygame.init()
@@ -46,11 +50,11 @@ def execution_end_sound():
 
 	pygame.quit()
 
-def recognize_text(image_full_name):
+def recognize_text(image_full_name, lang="en"):
 	image = cv2.imread(f"./{IMG_PATH}/{image_full_name}")
 	if OS_NAME == "Windows":
 		pytesseract.pytesseract.tesseract_cmd = TESSERACT_WINDOWS_PATH
-	text = pytesseract.image_to_string(image).strip()
+	text = pytesseract.image_to_string(image, lang="por").strip()
 	
 	return text
 

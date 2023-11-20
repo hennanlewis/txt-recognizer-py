@@ -92,6 +92,10 @@ main,
 	z-index: 10;
 }
 
+.finalText {
+	white-space: pre-line;
+}
+
 .main_title {
 	padding: .5rem;
 	padding-left: 1.5rem;
