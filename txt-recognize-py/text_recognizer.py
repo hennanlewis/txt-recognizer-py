@@ -13,6 +13,7 @@ IMG_EXTENSIONS = [".jpg", ".jpeg", ".png", ".bmp"]
 TESSERACT_WINDOWS_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 IMG_PATH = "images"
 
+# corrigir esta função
 def check_image_folder_exist():
 	if not os.path.exists(IMG_PATH):
 		os.makedirs(IMG_PATH)

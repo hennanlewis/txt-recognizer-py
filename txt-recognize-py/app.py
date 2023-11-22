@@ -1,6 +1,7 @@
 import time
 
-from text_recognizer import get_clipboard_image, text_from_clipboard_image
+from text_recognizer import get_clipboard_image, text_from_clipboard_image, get_all_images_names
+from text_recognizer import image_text_from_image_folder
 
 from flask import Flask, render_template, jsonify
 
@@ -21,5 +22,17 @@ def clipboard_recognition():
 	return jsonify({ "text": "" })
 
 
+@app.route("/local_files_recognition")
+def local_files_recognition():
+	img_names = get_all_images_names()
+	text = image_text_from_image_folder(img_names)
+	print(text)
+	return jsonify({ "text": text })
+
+
 if __name__ == "__main__":
+
+
+
+
 	app.run(debug=True)
