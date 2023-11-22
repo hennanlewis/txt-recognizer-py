@@ -89,7 +89,12 @@ main,
 	background: #FFF;
 	border-radius: .5rem;
 	box-shadow: 0 2px 3px #0006;
+	overflow: auto;
 	z-index: 10;
+}
+
+main {
+	margin-bottom: auto;
 }
 
 .finalText {
@@ -185,6 +190,7 @@ div.actions:hover {
 }
 
 .actions button {
+	position: relative;
 	padding: .5rem;
 	padding-left: 1.5rem;
 	background: var(--primary);
@@ -200,6 +206,27 @@ div.actions:hover {
 
 .actions button:hover {
 	background: var(--support);
+}
+
+.actions button:after {
+	content: "";
+}
+
+.actions button.active:after {
+	position: absolute;
+	right: 1rem;
+	height: 1rem;
+	width: 1rem;
+	border: 5px solid white;
+	border-bottom: 5px solid transparent;
+	border-radius: 100%;
+	animation: spin 1s infinite ease-in-out;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 .footer {

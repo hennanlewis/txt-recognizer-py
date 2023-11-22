@@ -13,7 +13,7 @@ IMG_EXTENSIONS = [".jpg", ".jpeg", ".png", ".bmp"]
 TESSERACT_WINDOWS_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 IMG_PATH = "images"
 
-# corrigir esta função
+
 def check_image_folder_exist():
 	if not os.path.exists(IMG_PATH):
 		os.makedirs(IMG_PATH)
@@ -60,8 +60,8 @@ def recognize_text(image_full_name, lang="en"):
 	return text
 
 def text_delimiter(full_text, delimiter_name):
-	start = f"########## {delimiter_name} start ##########"
-	end = f"########## {delimiter_name} end ##########"
+	start = f"<!-- {delimiter_name} start --/>"
+	end = f"<!-- {delimiter_name} end --/>"
 	return f"{start}\n{full_text}\n{end}"
 
 def image_text_from_image_folder(img_names):
