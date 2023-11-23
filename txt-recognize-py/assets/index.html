@@ -4,8 +4,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="stylesheet" href="assets/styles/style.css">
+	<title>Image Text Scanner</title>
+	<link rel="icon" type="image/x-icon" href="favicon/icon.png">
+	<link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
@@ -20,11 +21,11 @@
 		<main>
 			<h2 class="main_title">Options</h2>
 			<div class="content">
-				<form class="content_form">
+				<form id="form" class="content_form">
 					<div>
-						<label for="location" class="form_select_label">Text language</label>
-						<select id="location" name="location" class="form_select_input">
-							<option value="en">English</option>
+						<label for="language" class="form_select_label">Text language</label>
+						<select id="language" name="language" class="form_select_input">
+							<option value="eng">English</option>
 							<option value="por">Portuguese</option>
 							<option value="jp">Japanese</option>
 						</select>
@@ -60,7 +61,8 @@
 	<footer class="footer">
 		<span>© 2023 <a href="https://hennanlewis.com">Hennan Lewis</a></span>
 	</footer>
-	<script src="assets/scripts/script.js" type="module"></script>
+	<script type="text/javascript" src="/eel.js"></script>
+	<script type="text/javascript" src="scripts/script.js"></script>
 </body>
 
 </html>
