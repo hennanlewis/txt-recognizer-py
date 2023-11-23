@@ -96,8 +96,9 @@ main {
 	margin-bottom: auto;
 }
 
-.finalText {
+.finalText textarea {
 	white-space: pre-line;
+	font-size: 1em;
 }
 
 .main_title {
@@ -170,7 +171,30 @@ main {
 	column-gap: 0.5rem;
 }
 
-.element_with-description span {
+.element_with-description .form_select-path {
+	display: flex;
+	flex-direction: column;
+	row-gap: .25rem;
+}
+
+.form_select-path button {
+	padding: .25rem;
+	background: var(--primary);
+	font-size: 1em;
+	color: var(--text-primary);
+	border-radius: 0.25rem;
+	border: none;
+	box-shadow: 0 1px 3px #0004;
+	cursor: pointer;
+	transition: all 200ms;
+}
+
+.form_select-path button:hover {
+	background: var(--support);
+}
+
+.element_with-description span,
+.form_select-path span {
 	font-size: 0.875em;
 	color: var(--text-span);
 }

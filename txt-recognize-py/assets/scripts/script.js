@@ -1,16 +1,24 @@
-const clipboardCheckbox = document.querySelector("#clipboard")
 const startRecognitionButton = document.querySelector("#startRecognitionButton")
-const soundNotification = new Audio("/assets/sound/finished.mp3")
+const clipboardCheckbox = document.querySelector("#clipboard")
+const selectedLanguage = document.querySelector("#language")
+const pathButton = document.querySelector("#path-button")
+const pathInput = document.querySelector("#path-input")
+
+const soundNotification = new Audio("/sound/finished.mp3")
+
+pathButton.addEventListener("click", async () => {
+	eel.selecionar_diretorio()(pyReturn => {
+		console.log(pyReturn)
+	})
+})
 
 startRecognitionButton.addEventListener("click", async (event) => {
 	event.target.classList.add("active")
-
-	const url = clipboardCheckbox.checked ? "/clipboard_recognition" : "/local_files_recognition"
-	const response = await fetch(url)
-	const { text } = await response.json()
-
-	const result = document.querySelector("#result")
-	result.value = text
-	soundNotification.play()
-	event.target.classList.remove("active")
+	const pyFuncToExecution = clipboardCheckbox.checked ? "clipboard_recognition" : "local_files_recognition"
+	eel[pyFuncToExecution]()((pyReturn) => {
+		const result = document.querySelector("#result")
+		result.value = pyReturn
+		soundNotification.play()
+		event.target.classList.remove("active")
+	})
 })
