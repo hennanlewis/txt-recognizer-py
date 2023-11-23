@@ -84,12 +84,11 @@ main,
 	flex-direction: column;
 	width: 30rem;
 	max-width: 95vw;
-	min-height: 20rem;
+	min-height: 30rem;
 	padding: 1.5rem;
 	background: #FFF;
 	border-radius: .5rem;
 	box-shadow: 0 2px 3px #0006;
-	overflow: auto;
 	z-index: 10;
 }
 
@@ -132,7 +131,7 @@ main {
 	padding: 1rem;
 }
 
-.content_form > div:hover {
+.content_form>div:hover {
 	background: #0001;
 	border-radius: 0.5rem;
 }
@@ -229,6 +228,11 @@ div.actions:hover {
 	}
 }
 
+textarea.content {
+	resize: none;
+	outline: none;
+}
+
 .footer {
 	display: flex;
 	justify-content: center;
@@ -243,4 +247,16 @@ div.actions:hover {
 	color: var(--text-support);
 	font-weight: 600;
 	text-decoration: none;
+}
+
+@media (max-width: 480px) {
+
+	main,
+	.finalText {
+		padding: 0.5rem;
+	}
+
+	.content_form>div {
+		padding: 0.5rem;
+	}
 }
