@@ -10,7 +10,7 @@ startRecognitionButton.addEventListener("click", async (event) => {
 	const { text } = await response.json()
 
 	const result = document.querySelector("#result")
-	result.textContent = text
+	result.value = text
 	soundNotification.play()
 	event.target.classList.remove("active")
 })
