@@ -2,7 +2,6 @@ from PIL import ImageGrab
 import cv2
 import os
 import platform
-import pygame
 import pyperclip
 import pytesseract
 import time
@@ -37,25 +36,13 @@ def text_from_clipboard_image(clipboard_image):
 		clipboard_image_text = recognize_text(clipboard_image_name)
 		os.remove(f"./{IMG_PATH}/{clipboard_image_name}")
 		pyperclip.copy(clipboard_image_text)
-		print(f"\n{clipboard_image_text}\n")
 		return clipboard_image_text
 
-def execution_end_sound():
-	pygame.init()
-	pygame.mixer.music.load("./sound/finished.mp3")
-	pygame.mixer.music.play()
-
-	# Aguarda até que a reprodução de áudio termine
-	while pygame.mixer.music.get_busy():
-		pygame.time.delay(100)
-
-	pygame.quit()
-
-def recognize_text(image_full_name, lang="en"):
+def recognize_text(image_full_name, lang="eng"):
 	image = cv2.imread(f"./{IMG_PATH}/{image_full_name}")
 	if OS_NAME == "Windows":
 		pytesseract.pytesseract.tesseract_cmd = TESSERACT_WINDOWS_PATH
-	text = pytesseract.image_to_string(image, lang="por").strip()
+	text = pytesseract.image_to_string(image, lang).strip()
 	
 	return text
 

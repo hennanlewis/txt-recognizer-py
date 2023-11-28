@@ -1,9 +1,12 @@
-import time
 from tkinter import filedialog
 import eel
 
-from text_recognizer import get_clipboard_image, text_from_clipboard_image, get_all_images_names
-from text_recognizer import image_text_from_image_folder
+from text_recognizer import (
+	get_clipboard_image,
+	text_from_clipboard_image,
+	get_all_images_names,
+	image_text_from_image_folder
+)
 
 eel.init("assets")
 

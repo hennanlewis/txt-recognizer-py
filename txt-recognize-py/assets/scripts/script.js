@@ -20,6 +20,12 @@ const finishProcess = (event) => {
 	event.target.classList.remove("active")
 }
 
+const pythonFunctionToExecute = async (functionName) => {
+	return new Promise(resolver => {
+		eel[functionName]()((pyReturn) => resolver(pyReturn))
+	})
+}
+
 startRecognitionButton.addEventListener("click", async (event) => {
 	startProcess(event)
 	const pythonFunctionName = clipboardCheckbox.checked ? "clipboard_recognition" : "local_files_recognition"
@@ -27,9 +33,3 @@ startRecognitionButton.addEventListener("click", async (event) => {
 	textarea.value = textRecognized
 	finishProcess(event)
 })
-
-const pythonFunctionToExecute = async (functionName) => {
-	return new Promise(resolver => {
-		eel[functionName]()((pyReturn) => resolver(pyReturn))
-	})
-}
