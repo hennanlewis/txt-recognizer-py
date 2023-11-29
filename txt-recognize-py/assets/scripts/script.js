@@ -1,6 +1,6 @@
 const startRecognitionButton = document.querySelector("#startRecognitionButton")
 const clipboardCheckbox = document.querySelector("#clipboard")
-const selectedLanguage = document.querySelector("#language")
+const language = document.querySelector("#language")
 const pathButton = document.querySelector("#path-button")
 const pathInput = document.querySelector("#path-input")
 const textarea = document.querySelector("#textarea")
@@ -20,16 +20,16 @@ const finishProcess = (event) => {
 	event.target.classList.remove("active")
 }
 
-const pythonFunctionToExecute = async (functionName) => {
+const pythonFunctionToExecute = async (functionName, language) => {
 	return new Promise(resolver => {
-		eel[functionName]()((pyReturn) => resolver(pyReturn))
+		eel[functionName](language)((pyReturn) => resolver(pyReturn))
 	})
 }
 
 startRecognitionButton.addEventListener("click", async (event) => {
 	startProcess(event)
 	const pythonFunctionName = clipboardCheckbox.checked ? "clipboard_recognition" : "local_files_recognition"
-	const textRecognized = await pythonFunctionToExecute(pythonFunctionName)
+	const textRecognized = await pythonFunctionToExecute(pythonFunctionName, language.value)
 	textarea.value = textRecognized
 	finishProcess(event)
 })

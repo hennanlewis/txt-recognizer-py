@@ -29,12 +29,13 @@ def get_all_images_names():
 def get_clipboard_image():
 	return ImageGrab.grabclipboard()
 
-def text_from_clipboard_image(clipboard_image):
+def text_from_clipboard_image(clipboard_image, lang="eng"):
 		check_image_folder_exist()
 		clipboard_image_name = f"image_{str(time.time())}.jpg"
 		clipboard_image.save(f"./{IMG_PATH}/{clipboard_image_name}")
-		clipboard_image_text = recognize_text(clipboard_image_name)
+		clipboard_image_text = recognize_text(clipboard_image_name, lang)
 		os.remove(f"./{IMG_PATH}/{clipboard_image_name}")
+		print(lang)
 		pyperclip.copy(clipboard_image_text)
 		return clipboard_image_text
 
@@ -51,10 +52,10 @@ def text_delimiter(full_text, delimiter_name):
 	end = f"<!-- {delimiter_name} end --/>"
 	return f"{start}\n{full_text}\n{end}"
 
-def image_text_from_image_folder(img_names):
+def image_text_from_image_folder(img_names, lang= "eng"):
 	text = ""
 	for index, image_full_name in enumerate(img_names):
-		file_text = recognize_text(image_full_name)
+		file_text = recognize_text(image_full_name, lang)
 		specified_text = text_delimiter(file_text, image_full_name)
 
 		text = specified_text if index == 0 else f"{text}\n\n{specified_text}"

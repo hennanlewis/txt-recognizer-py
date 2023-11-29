@@ -17,15 +17,15 @@ def select_folder():
 
 
 @eel.expose
-def clipboard_recognition():
+def clipboard_recognition(lang = "eng"):
 	clipboard_image = get_clipboard_image()
 
 	if clipboard_image:
-		return text_from_clipboard_image(clipboard_image)
+		return text_from_clipboard_image(clipboard_image, lang)
 
 
 @eel.expose
-def local_files_recognition():
+def local_files_recognition(lang = "eng"):
 	img_names = get_all_images_names()
 	return image_text_from_image_folder(img_names)
 
