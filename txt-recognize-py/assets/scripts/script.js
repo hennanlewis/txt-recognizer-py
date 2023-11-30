@@ -1,8 +1,9 @@
 const startRecognitionButton = document.querySelector("#startRecognitionButton")
 const clipboardCheckbox = document.querySelector("#clipboard")
-const language = document.querySelector("#language")
 const pathButton = document.querySelector("#path-button")
+const pathSelection = document.querySelector("#path-selection")
 const pathInput = document.querySelector("#path-input")
+const language = document.querySelector("#language")
 const textarea = document.querySelector("#textarea")
 
 const soundNotification = new Audio("/sound/finished.mp3")
@@ -16,15 +17,21 @@ const finishProcess = (event) => {
 
 const pythonFunctionToExecute = async (functionName, args) => {
 	return new Promise(resolver => {
-			return args ?
-				eel[functionName](args)((pyReturn) => resolver(pyReturn))
-				:
-				eel[functionName]()((pyReturn) => resolver(pyReturn))
+		return args ?
+			eel[functionName](args)((pyReturn) => resolver(pyReturn))
+			:
+			eel[functionName]()((pyReturn) => resolver(pyReturn))
 	})
 }
 
 pathButton.addEventListener("click", async () => {
-	const folder = await pythonFunctionToExecute("select_folder")
+	await pythonFunctionToExecute("select_folder")
+})
+
+clipboardCheckbox.addEventListener("change", (event) => {
+	const isChecked = event.currentTarget.checked
+	console.log(pathSelection)
+	pathSelection.style.display = isChecked ? "none" : "flex"
 })
 
 startRecognitionButton.addEventListener("click", async (event) => {

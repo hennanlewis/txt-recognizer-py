@@ -171,6 +171,10 @@ main {
 	column-gap: 0.5rem;
 }
 
+#path-selection {
+	display: none;
+}
+
 .element_with-description .form_select-path {
 	display: flex;
 	flex-direction: column;

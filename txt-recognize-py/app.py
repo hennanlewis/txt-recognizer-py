@@ -8,8 +8,7 @@ from text_recognizer import (
 	text_from_clipboard_image,
 	change_image_path_folder,
 	get_all_images_names,
-	get_clipboard_image,
-	img_path
+	get_clipboard_image
 )
 
 eel.init("assets")
