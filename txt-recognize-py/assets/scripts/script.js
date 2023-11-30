@@ -7,12 +7,6 @@ const textarea = document.querySelector("#textarea")
 
 const soundNotification = new Audio("/sound/finished.mp3")
 
-pathButton.addEventListener("click", async () => {
-	eel.selecionar_diretorio()(pyReturn => {
-		console.log(pyReturn)
-	})
-})
-
 const startProcess = (event) => event.target.classList.add("active")
 
 const finishProcess = (event) => {
@@ -20,11 +14,18 @@ const finishProcess = (event) => {
 	event.target.classList.remove("active")
 }
 
-const pythonFunctionToExecute = async (functionName, language) => {
+const pythonFunctionToExecute = async (functionName, args) => {
 	return new Promise(resolver => {
-		eel[functionName](language)((pyReturn) => resolver(pyReturn))
+			return args ?
+				eel[functionName](args)((pyReturn) => resolver(pyReturn))
+				:
+				eel[functionName]()((pyReturn) => resolver(pyReturn))
 	})
 }
+
+pathButton.addEventListener("click", async () => {
+	const folder = await pythonFunctionToExecute("select_folder")
+})
 
 startRecognitionButton.addEventListener("click", async (event) => {
 	startProcess(event)

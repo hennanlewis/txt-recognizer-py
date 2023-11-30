@@ -26,25 +26,36 @@ def get_all_images_names():
 			img_array.append(image_name)
 	return img_array
 
+def change_image_path_folder(path):
+	global IMG_PATH
+	IMG_PATH = path
+
 def get_clipboard_image():
 	return ImageGrab.grabclipboard()
 
 def text_from_clipboard_image(clipboard_image, lang="eng"):
+		IMG_PATH = "images"
 		check_image_folder_exist()
+
 		clipboard_image_name = f"image_{str(time.time())}.jpg"
-		clipboard_image.save(f"./{IMG_PATH}/{clipboard_image_name}")
+		clipboard_image.save(f"{IMG_PATH}/{clipboard_image_name}")
 		clipboard_image_text = recognize_text(clipboard_image_name, lang)
-		os.remove(f"./{IMG_PATH}/{clipboard_image_name}")
-		print(lang)
+
+		os.remove(f"{IMG_PATH}/{clipboard_image_name}")
 		pyperclip.copy(clipboard_image_text)
+
 		return clipboard_image_text
 
 def recognize_text(image_full_name, lang="eng"):
-	image = cv2.imread(f"./{IMG_PATH}/{image_full_name}")
-	if OS_NAME == "Windows":
-		pytesseract.pytesseract.tesseract_cmd = TESSERACT_WINDOWS_PATH
-	text = pytesseract.image_to_string(image, lang).strip()
-	
+	text = ""
+	try:
+		image = cv2.imread(os.path.abspath(f"{IMG_PATH}\{image_full_name}"))
+		if OS_NAME == "Windows":
+			pytesseract.pytesseract.tesseract_cmd = TESSERACT_WINDOWS_PATH
+		text = pytesseract.image_to_string(image, lang).strip()
+	except Exception:
+		text = f"The image <{image_full_name}> could not be read. Try to rename it"
+
 	return text
 
 def text_delimiter(full_text, delimiter_name):
