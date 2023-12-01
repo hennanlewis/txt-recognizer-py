@@ -5,7 +5,7 @@ import platform
 import pyperclip
 import pytesseract
 import time
-
+import shutil
 
 OS_NAME = platform.system()
 IMG_EXTENSIONS = [".jpg", ".jpeg", ".png", ".bmp"]
@@ -34,34 +34,36 @@ def get_clipboard_image():
 	return ImageGrab.grabclipboard()
 
 def text_from_clipboard_image(clipboard_image, lang="eng"):
-		IMG_PATH = "images"
-		check_image_folder_exist()
+	check_image_folder_exist()
 
-		clipboard_image_name = f"image_{str(time.time())}.jpg"
-		clipboard_image.save(f"{IMG_PATH}/{clipboard_image_name}")
-		clipboard_image_text = recognize_text(clipboard_image_name, lang)
+	clipboard_image_name = f"image_{str(time.time())}.jpg"
+	clipboard_image.save(f"images/{clipboard_image_name}")
+	clipboard_image_text = recognize_text(clipboard_image_name, lang)
 
-		os.remove(f"{IMG_PATH}/{clipboard_image_name}")
-		pyperclip.copy(clipboard_image_text)
-
-		return clipboard_image_text
+	os.remove(f"images/{clipboard_image_name}")
+	pyperclip.copy(clipboard_image_text)
+	return clipboard_image_text
 
 def recognize_text(image_full_name, lang="eng"):
-	text = ""
-	try:
-		image = cv2.imread(os.path.abspath(f"{IMG_PATH}\{image_full_name}"))
-		if OS_NAME == "Windows":
-			pytesseract.pytesseract.tesseract_cmd = TESSERACT_WINDOWS_PATH
-		text = pytesseract.image_to_string(image, lang).strip()
-	except Exception:
-		text = f"The image <{image_full_name}> could not be read. Try to rename it"
+	full_path = os.path.abspath(f"{IMG_PATH}\{image_full_name}")
+	_, file_extension = os.path.splitext(image_full_name)
+	local_image_path = "images"
+	local_image_name = f"image_{str(time.time())}.{file_extension}"
+	shutil.copyfile(full_path, f"{local_image_path}/{local_image_name}")
+
+	image = cv2.imread(f"{local_image_path}/{local_image_name}")
+	if OS_NAME == "Windows":
+		pytesseract.pytesseract.tesseract_cmd = TESSERACT_WINDOWS_PATH
+	text = pytesseract.image_to_string(image, lang).strip()
+	os.remove(f"{local_image_path}/{local_image_name}")
 
 	return text
 
 def text_delimiter(full_text, delimiter_name):
 	start = f"<!-- {delimiter_name} start --/>"
 	end = f"<!-- {delimiter_name} end --/>"
-	return f"{start}\n{full_text}\n{end}"
+	full_text = "\n" if full_text == "" else f"\n{full_text}\n"
+	return f"{start}{full_text}{end}"
 
 def image_text_from_image_folder(img_names, lang= "eng"):
 	text = ""
